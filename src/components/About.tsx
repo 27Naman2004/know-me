@@ -166,7 +166,7 @@ const About = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Current Year</span>
-                  <span className="font-medium">2nd Year (4th Semester)</span>
+                  <span className="font-medium">3rd Year (5th Semester)</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Graduation</span>

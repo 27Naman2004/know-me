@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiAward, FiCalendar, FiExternalLink, FiUser, FiStar, FiEye, FiChevronRight } from 'react-icons/fi';
-import { SiGoogle, SiCoursera, SiHackerrank, SiNvidia } from 'react-icons/si';
+import { SiGoogle, SiCoursera, SiHackerrank, SiNvidia,SiPostman } from 'react-icons/si';
 import { useState } from 'react';
 
 // Certificate images
@@ -11,6 +11,7 @@ import machineLearningCert from '@/assets/certificates/machine-learning-certific
 import chatgptCert from '@/assets/certificates/chatgpt-certificate.png';
 import computerCommCert from '@/assets/certificates/computer-communications-certificate.png';
 import bitsBytesCert from '@/assets/certificates/bits-bytes-certificate.png';
+import postmanApiCert from '@/assets/certificates/postman-api-certificate.png';
 
 const Certifications = () => {
   const certifications = [
@@ -52,6 +53,19 @@ const Certifications = () => {
       skills: ['Networking', 'TCP/IP', 'Network Protocols', 'Network Security'],
       verificationLink: 'https://www.coursera.org/account/accomplishments/verify/V7AX1P5XXCYU',
       certificateImage: bitsBytesCert
+    },
+    {
+      title: 'Postman API Fundamentals Student Expert',
+      issuer: 'Postman',
+      date: '2025',
+      category: 'API Development',
+      icon: SiPostman,
+      color: 'text-orange-500',
+      bgColor: 'bg-orange-500',
+      description: 'Comprehensive understanding of API fundamentals, testing, and development using Postman platform.',
+      skills: ['API Testing', 'REST APIs', 'Postman', 'API Documentation', 'HTTP Methods'],
+      verificationLink: 'https://badgr.com/public/assertions/giskFoFbRR6eHdIFQ8usmA',
+      certificateImage: postmanApiCert
     },
     {
       title: 'Machine Learning With Data Science',
@@ -561,9 +575,13 @@ const Certifications = () => {
                           href={cert.verificationLink}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(cert.verificationLink, '_blank', 'noopener,noreferrer');
+                          }}
                           whileHover={{ scale: 1.02, y: -3 }}
                           whileTap={{ scale: 0.98 }}
-                          className="w-full mt-4 flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-accent/20 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/25 group"
+                          className="w-full mt-4 flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-accent/20 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/25 group cursor-pointer"
                         >
                           <motion.div
                             whileHover={{ rotate: 360, scale: 1.2 }}
@@ -814,4 +832,4 @@ const Certifications = () => {
   );
 };
 
-export default Certifications;  
+export default Certifications;
