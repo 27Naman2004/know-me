@@ -809,25 +809,9 @@ const Certifications = () => {
             />
           </motion.a>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-12 flex justify-center"
-        >
-          <div className="flex items-center space-x-3 px-6 py-3 rounded-full border border-border/50 bg-card/50 backdrop-blur-sm">
-            <span className="text-sm text-muted-foreground">
-              Scroll horizontally to explore all certifications
-            </span>
-            <FiChevronRight className="text-muted-foreground" size={16} />
-          </div>
-        </motion.div>
       </div>
     </section>
   );
 };
 
-export default Certifications;
+export default Certifications;  
