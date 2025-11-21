@@ -25,8 +25,8 @@ const Experience = () => {
         { name: 'Streamlit', icon: SiStreamlit, color: 'text-red-400' }
       ],
       icon: FiBriefcase,
-      color: 'bg-primary',
-      status: 'Current'
+      color: '',
+      status: 'Previous Works'
     }
   ];
 
@@ -46,9 +46,9 @@ const Experience = () => {
       color: 'text-accent'
     },
     {
-      date: 'March 2025',
+      date: 'March 2024',
       title: 'Advanced Certifications',
-      description: 'Earned multiple certifications in ML and Data Science',
+      description: 'Earned multiple certifications in ML and Data Science and In the Field Of Computer Science',
       icon: FiAward,
       color: 'text-success'
     },
