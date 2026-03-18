@@ -26,7 +26,7 @@ const Hero = () => {
     },
     {
       icon: FiLinkedin,
-      href: 'https://linkedin.com/in/naman-katare-916214300',
+      href: 'https://www.linkedin.com/in/namankatare07/',
       label: 'LinkedIn',
       color: 'hover:text-blue-400'
     }
