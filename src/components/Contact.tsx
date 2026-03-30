@@ -24,9 +24,9 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const EMAIL_SERVICE_ID = "service_eapechi";
+  const EMAIL_SERVICE_ID = "service_pw19wee";
   const EMAIL_TEMPLATE_ID = "template_mzg9u09";
-  const EMAIL_PUBLIC_KEY = "hKeakPMxIXKcCf2ZB";
+  const EMAIL_PUBLIC_KEY = "kq1bfNFHEJWUwVgz0";
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
