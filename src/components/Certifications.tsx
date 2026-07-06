@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiAward, FiCalendar, FiExternalLink, FiUser, FiStar, FiEye, FiChevronRight } from 'react-icons/fi';
-import { SiGoogle, SiCoursera, SiHackerrank, SiNvidia,SiPostman } from 'react-icons/si';
+import { SiGoogle, SiCoursera, SiHackerrank, SiNvidia, SiPostman } from 'react-icons/si';
 import { useState } from 'react';
 
 // Certificate images
@@ -14,6 +14,8 @@ import bitsBytesCert from '@/assets/certificates/bits-bytes-certificate.png';
 import postmanApiCert from '@/assets/certificates/postman-api-certificate.png';
 
 const Certifications = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const certifications = [
     {
       title: 'OCI Data Science',
@@ -38,7 +40,7 @@ const Certifications = () => {
       bgColor: 'bg-green-500',
       description: 'Comprehensive AI course covering fundamentals to advanced GenAI practices.',
       skills: ['AI', 'GenAI', 'Machine Learning', 'Neural Networks'],
-      verificationLink: '#', // No link provided
+      verificationLink: '#',
       certificateImage: nvidiaAiCert
     },
     {
@@ -142,7 +144,7 @@ const Certifications = () => {
       bgColor: 'bg-purple-400',
       description: 'Fundamentals of cloud computing, deployment models, and cloud services.',
       skills: ['Cloud Computing', 'AWS', 'Cloud Architecture', 'Distributed Systems'],
-      verificationLink: '#', // No link provided
+      verificationLink: '#',
       certificateImage: null
     },
     {
@@ -160,672 +162,246 @@ const Certifications = () => {
     }
   ];
 
-  const categories = [...new Set(certifications.map(cert => cert.category))];
+  const categories = ['All', ...new Set(certifications.map(cert => cert.category))];
+
+  const filteredCertifications = selectedCategory
+    ? certifications.filter(cert => cert.category === selectedCategory)
+    : certifications;
 
   return (
     <section id="certifications" className="py-20 relative overflow-hidden">
-      {/* Enhanced Background Elements */}
-      <div className="absolute inset-0">
-        {/* Animated gradient background */}
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5" />
-        
-        {/* Multiple floating orbs with enhanced animations */}
-        <motion.div 
-          className="absolute top-10 right-10 w-96 h-96 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 blur-3xl opacity-50"
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 20, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-gradient-to-r from-success/20 to-warning/20 blur-3xl opacity-50"
-          animate={{ 
-            x: [0, -80, 0],
-            y: [0, -60, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ 
-            duration: 25, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 5
-          }}
-        />
-        <motion.div 
-          className="absolute top-1/3 left-1/2 w-64 h-64 rounded-full bg-gradient-to-r from-accent/15 to-primary/15 blur-3xl opacity-30"
-          animate={{ 
-            rotate: [0, 360],
-            scale: [1, 1.3, 1]
-          }}
-          transition={{ 
-            duration: 30, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-        />
-        
-        {/* Animated geometric patterns */}
-        <motion.div 
-          className="absolute top-20 left-20 w-32 h-32 border border-primary/10 opacity-20"
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          style={{ transform: 'rotate(45deg)' }}
-        />
-        <motion.div 
-          className="absolute bottom-32 right-32 w-24 h-24 border border-accent/10 opacity-20"
-          animate={{ 
-            rotate: [0, 360],
-            y: [0, -20, 0]
-          }}
-          transition={{ 
-            rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-          }}
-          style={{ transform: 'rotate(12deg)' }}
-        />
-        
-        {/* Grid pattern overlay */}
+        <div className="absolute top-10 right-10 w-96 h-96 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 blur-3xl opacity-50 animate-float" />
+        <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-gradient-to-r from-success/20 to-warning/20 blur-3xl opacity-50 animate-float-delayed" />
         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgba(255,255,255,0.15)_1px,_transparent_0)] bg-[size:20px_20px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Enhanced Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-block mb-4"
-          >
-            <div className="flex items-center justify-center space-x-2 text-accent mb-2">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <FiAward size={24} />
-              </motion.div>
-              <span className="text-sm font-medium tracking-wider uppercase">Professional Certifications</span>
-            </div>
-          </motion.div>
-          
-          <motion.h2 
-            className="text-5xl md:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <span className="text-gradient bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent">
-              Industry Expertise
-            </span>
-            <br />
-            <span className="text-foreground">& Achievements</span>
-          </motion.h2>
-          
-          <motion.p 
-            className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Committed to continuous learning and excellence through verified certifications from leading technology companies and institutions
-          </motion.p>
-        </motion.div>
-
-        {/* Enhanced Category Stats */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+          className="text-center mb-16"
         >
-          {categories.map((category, index) => {
-            const count = certifications.filter(cert => cert.category === category).length;
+          <div className="inline-block mb-4">
+            <div className="flex items-center justify-center space-x-2 text-accent mb-2">
+              <FiAward size={20} className="animate-pulse" />
+              <span className="text-sm font-medium tracking-wider uppercase">Professional Certifications</span>
+            </div>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-gradient">Industry Expertise</span>
+            <br />
+            <span className="text-foreground">& Achievements</span>
+          </h2>
+          
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Committed to continuous learning and excellence through verified certifications from leading technology companies and institutions
+          </p>
+        </motion.div>
+
+        {/* Category Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-12"
+        >
+          {categories.map((category) => {
+            const count = category === 'All'
+              ? certifications.length
+              : certifications.filter(cert => cert.category === category).length;
+            const isActive = (category === 'All' && selectedCategory === null) || selectedCategory === category;
+            
             return (
-              <motion.div
+              <button
                 key={category}
-                initial={{ opacity: 0, scale: 0.5, y: 50 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -5,
-                  transition: { duration: 0.2 }
-                }}
-                className="card-glass p-6 text-center relative overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedCategory(category === 'All' ? null : category)}
+                className={`p-4 text-center rounded-xl border transition-all duration-300 hover:scale-[1.02] flex flex-col justify-center items-center gap-1 ${
+                  isActive 
+                    ? 'border-accent bg-accent/10 shadow-lg shadow-accent/5' 
+                    : 'card-glass hover:border-primary/40'
+                }`}
               >
-                {/* Animated background effect */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  whileHover={{ opacity: 1 }}
-                />
-                
-                <motion.div 
-                  className="text-3xl font-bold text-gradient mb-2"
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
+                <div className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-accent' : 'text-gradient'}`}>
                   {count}
-                </motion.div>
-                <motion.div 
-                  className="text-sm text-muted-foreground font-medium"
-                  whileHover={{ color: "hsl(var(--accent))" }}
-                  transition={{ duration: 0.3 }}
-                >
+                </div>
+                <div className="text-xs text-muted-foreground font-medium">
                   {category}
-                </motion.div>
-                
-                {/* Decorative corner element */}
-                <motion.div 
-                  className="absolute top-2 right-2 w-6 h-6 bg-accent/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  whileHover={{ scale: 1.5, rotate: 180 }}
-                />
-              </motion.div>
+                </div>
+              </button>
             );
           })}
         </motion.div>
 
-        {/* All Certifications - Horizontal Scrollable Layout */}
+        {/* Certifications Horizontal Scrollable Row */}
+        <div className="relative min-h-[480px]">
+          {/* Scroll indicators/shadow gradients */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex space-x-6 overflow-x-auto pb-6 px-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary/30 snap-x snap-mandatory">
+            {filteredCertifications.map((cert, index) => (
+              <motion.div
+                key={cert.title}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="group flex-shrink-0 w-80 snap-start card-glass p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl flex flex-col justify-between min-h-[460px] cursor-pointer"
+              >
+                <div>
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`p-3 rounded-xl ${cert.bgColor} bg-opacity-20 flex-shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6`}>
+                      <cert.icon className={`text-2xl ${cert.color}`} />
+                    </div>
+                    <div className="text-right ml-4">
+                      <span className="text-[10px] md:text-xs text-accent font-medium px-2 py-0.5 bg-accent/10 rounded-full inline-block">
+                        {cert.category}
+                      </span>
+                      <div className="flex items-center text-xs text-muted-foreground mt-1 justify-end">
+                        <FiCalendar className="mr-1 flex-shrink-0" size={11} />
+                        {cert.date}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Certificate Image */}
+                  {cert.certificateImage && (
+                    <div className="mb-4 relative aspect-[4/3] rounded-lg overflow-hidden border border-card-border shadow-sm">
+                      <img 
+                        src={cert.certificateImage} 
+                        alt={`${cert.title} Certificate`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="bg-white/10 backdrop-blur-sm rounded-full p-2.5 transition-transform duration-300 translate-y-3 group-hover:translate-y-0">
+                          <FiEye className="text-white text-lg" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Details */}
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold group-hover:text-accent transition-colors duration-300 line-clamp-2 leading-tight">
+                      {cert.title}
+                    </h3>
+                    
+                    <div className="flex items-center text-sm text-accent">
+                      <FiUser className="mr-2 flex-shrink-0" size={13} />
+                      <span className="truncate font-medium">{cert.issuer}</span>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                      {cert.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Footer and verification */}
+                <div className="mt-4 pt-2">
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {cert.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-0.5 bg-muted rounded-full text-[10px] font-medium text-muted-foreground transition-colors duration-200 group-hover:bg-accent/10 group-hover:text-accent"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  {cert.verificationLink && cert.verificationLink !== '#' ? (
+                    <a
+                      href={cert.verificationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-accent/20 hover:border-primary/40 hover:shadow-lg text-primary"
+                    >
+                      <FiExternalLink size={13} />
+                      <span>Verify Certificate</span>
+                    </a>
+                  ) : (
+                    <div className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-muted/30 border border-transparent rounded-lg text-sm font-medium text-muted-foreground cursor-default">
+                      <FiEye size={13} className="opacity-60" />
+                      <span>Certificate Available</span>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll Instruction */}
+        <div className="text-center mt-6">
+          <div className="inline-flex items-center space-x-2 text-xs text-muted-foreground bg-card-glass px-4 py-2 rounded-full border border-card-border animate-pulse">
+            <span>Scroll horizontally to view more certifications</span>
+            <FiChevronRight size={14} />
+          </div>
+        </div>
+
+        {/* Achievement Summary */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16 card-glass p-8 text-center relative overflow-hidden"
         >
-          {/* Section Title */}
-          <motion.div 
-            className="flex items-center justify-center mb-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="flex items-center space-x-3">
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="p-3 rounded-full bg-gradient-to-r from-primary/20 to-accent/20"
-              >
-                <FiStar className="text-accent text-xl" />
-              </motion.div>
-              <h3 className="text-2xl font-bold text-gradient">All Certifications</h3>
-              <motion.div
-                animate={{ rotate: [360, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="p-3 rounded-full bg-gradient-to-l from-primary/20 to-accent/20"
-              >
-                <FiAward className="text-primary text-xl" />
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Horizontal Scrollable Container */}
-          <div className="relative">
-            {/* Scroll indicators with enhanced styling */}
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
-              <div className="w-12 h-full bg-gradient-to-r from-background via-background/80 to-transparent" />
-            </div>
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
-              <div className="w-12 h-full bg-gradient-to-l from-background via-background/80 to-transparent" />
-            </div>
-            
-            {/* Scrollable certificates container */}
-            <div 
-              className="overflow-x-auto pb-6 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary/50 hover:scrollbar-thumb-primary/70" 
-            >
-              <motion.div 
-                className="flex space-x-6 min-w-max px-6"
-                initial={{ x: -100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                {certifications.map((cert, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: index * 0.1,
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 15
-                    }}
-                    whileHover={{ 
-                      scale: 1.05, 
-                      y: -15,
-                      rotateY: 5,
-                      transition: { duration: 0.3, ease: "easeOut" }
-                    }}
-                    className="group flex-shrink-0 w-80 card-glass p-6 relative overflow-hidden cursor-pointer transform-gpu"
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      minHeight: '500px'
-                    }}
-                  >
-                    {/* Enhanced Hover Effects */}
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-success/10 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl"
-                      whileHover={{ 
-                        background: "linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.15), hsl(var(--success) / 0.15))"
-                      }}
-                    />
-                    
-                    {/* Animated border glow */}
-                    <motion.div 
-                      className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-accent/30 to-success/30 rounded-2xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
-                      whileHover={{ opacity: 1, scale: 1.02 }}
-                    />
-
-                    {/* Certificate Icon & Category */}
-                    <div className="flex items-start justify-between mb-4">
-                      <motion.div 
-                        className={`p-3 rounded-xl ${cert.bgColor} bg-opacity-20 flex-shrink-0 relative overflow-hidden`}
-                        whileHover={{ scale: 1.15, rotate: 10 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <motion.div
-                          className="absolute inset-0 bg-white/20 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"
-                        />
-                        <cert.icon className={`text-2xl ${cert.color} relative z-10`} />
-                      </motion.div>
-                      <div className="text-right">
-                        <motion.div 
-                          className="text-xs text-accent font-medium mb-1 px-2 py-1 bg-accent/10 rounded-full"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {cert.category}
-                        </motion.div>
-                        <div className="flex items-center text-xs text-muted-foreground">
-                          <motion.div
-                            whileHover={{ rotate: 360 }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            <FiCalendar className="mr-1" size={12} />
-                          </motion.div>
-                          {cert.date}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Certificate Image with Enhanced Animation */}
-                    {cert.certificateImage && (
-                      <motion.div 
-                        className="mb-4"
-                        whileHover={{ y: -8, rotateX: 5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-card-border shadow-lg">
-                          <motion.img 
-                            src={cert.certificateImage} 
-                            alt={`${cert.title} Certificate`}
-                            className="w-full h-full object-cover"
-                            whileHover={{ scale: 1.15 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                          />
-                          {/* Overlay with enhanced animation */}
-                          <motion.div 
-                            className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center"
-                            whileHover={{ opacity: 1 }}
-                          >
-                            <motion.div
-                              initial={{ scale: 0, rotate: -180 }}
-                              whileHover={{ scale: 1, rotate: 0 }}
-                              transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
-                              className="bg-white/20 backdrop-blur-sm rounded-full p-3"
-                            >
-                              <FiEye className="text-white text-2xl" />
-                            </motion.div>
-                          </motion.div>
-                          
-                          {/* Shimmer effect */}
-                          <motion.div 
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                          />
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Certificate Details */}
-                    <div className="space-y-3">
-                      <motion.h3 
-                        className="text-lg font-bold group-hover:text-accent transition-colors duration-300 line-clamp-2 leading-tight"
-                        whileHover={{ x: 8 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        {cert.title}
-                      </motion.h3>
-                      
-                      <motion.div 
-                        className="flex items-center text-sm text-accent"
-                        whileHover={{ x: 8 }}
-                        transition={{ type: "spring", stiffness: 400, delay: 0.05 }}
-                      >
-                        <motion.div
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <FiUser className="mr-2" size={14} />
-                        </motion.div>
-                        {cert.issuer}
-                      </motion.div>
-
-                      <motion.p 
-                        className="text-sm text-muted-foreground leading-relaxed line-clamp-3"
-                        whileHover={{ x: 8 }}
-                        transition={{ type: "spring", stiffness: 400, delay: 0.1 }}
-                      >
-                        {cert.description}
-                      </motion.p>
-
-                      {/* Skills with Enhanced Staggered Animation */}
-                      <div className="flex flex-wrap gap-2">
-                        {cert.skills.map((skill, skillIndex) => (
-                          <motion.span
-                            key={skill}
-                            initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ 
-                              duration: 0.4, 
-                              delay: (index * 0.05) + (skillIndex * 0.1),
-                              type: "spring",
-                              stiffness: 300
-                            }}
-                            whileHover={{ 
-                              scale: 1.15, 
-                              y: -3, 
-                              rotate: 5,
-                              transition: { duration: 0.2 }
-                            }}
-                            className="px-3 py-1 bg-gradient-to-r from-muted to-muted/80 rounded-full text-xs font-medium hover:from-accent/20 hover:to-accent/10 transition-all duration-300 cursor-pointer"
-                          >
-                            {skill}
-                          </motion.span>
-                        ))}
-                      </div>
-
-                      {/* Enhanced Action Buttons */}
-                      {cert.verificationLink && cert.verificationLink !== '#' ? (
-                        <motion.a
-                          href={cert.verificationLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(cert.verificationLink, '_blank', 'noopener,noreferrer');
-                          }}
-                          whileHover={{ scale: 1.02, y: -3 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="w-full mt-4 flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-accent/20 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/25 group cursor-pointer"
-                        >
-                          <motion.div
-                            whileHover={{ rotate: 360, scale: 1.2 }}
-                            transition={{ duration: 0.6 }}
-                          >
-                            <FiExternalLink size={14} className="text-primary" />
-                          </motion.div>
-                          <span className="text-primary font-semibold">Verify Certificate</span>
-                          <motion.div
-                            className="w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100"
-                            animate={{ 
-                              scale: [1, 1.5, 1], 
-                              opacity: [0.5, 1, 0.5] 
-                            }}
-                            transition={{ 
-                              duration: 2, 
-                              repeat: Infinity,
-                              repeatType: "loop"
-                            }}
-                          />
-                        </motion.a>
-                      ) : (
-                        <motion.div
-                          whileHover={{ scale: 1.02, y: -3 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="w-full mt-4 flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-card-secondary/50 to-card-secondary border border-card-border rounded-lg text-sm font-medium transition-all duration-300 hover:border-accent hover:shadow-lg hover:shadow-accent/25 group cursor-default"
-                        >
-                          <motion.div
-                            whileHover={{ scale: 1.2, rotate: 15 }}
-                            transition={{ type: "spring", stiffness: 400 }}
-                          >
-                            <FiEye size={14} className="group-hover:text-accent transition-colors" />
-                          </motion.div>
-                          <span className="group-hover:text-accent transition-colors">Certificate Available</span>
-                        </motion.div>
-                      )}
-                    </div>
-
-                    {/* Enhanced Decorative Elements */}
-                    <motion.div 
-                      className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-accent/20 to-transparent rounded-full blur-xl"
-                      whileHover={{ scale: 1.5, opacity: 0.3 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                    
-                    <motion.div 
-                      className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg"
-                      whileHover={{ scale: 1.3, opacity: 0.4 }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Enhanced Scroll instruction with animation */}
-          <motion.div 
-            className="text-center mt-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <motion.div 
-              className="inline-flex items-center space-x-3 text-sm text-muted-foreground bg-card-glass px-6 py-3 rounded-full border border-card-border"
-              animate={{ x: [0, 10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <span>Scroll horizontally to explore all certifications</span>
-              <motion.div
-                animate={{ x: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="flex items-center space-x-1"
-              >
-                <FiChevronRight size={16} />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Achievement Summary with Enhanced Design */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 card-glass p-8 text-center relative overflow-hidden"
-        >
-          {/* Background decoration */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5"
-            animate={{
-              background: [
-                "linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.05), hsl(var(--success) / 0.05))",
-                "linear-gradient(225deg, hsl(var(--success) / 0.05), hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.05))",
-                "linear-gradient(315deg, hsl(var(--accent) / 0.05), hsl(var(--success) / 0.05), hsl(var(--primary) / 0.05))"
-              ]
-            }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5 opacity-50 pointer-events-none" />
           
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FiAward className="text-5xl text-accent mx-auto mb-6" />
-          </motion.div>
+          <FiAward className="text-4xl text-accent mx-auto mb-4" />
           
-          <h3 className="text-3xl font-bold mb-4 text-gradient">Commitment to Excellence</h3>
-          <p className="text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          <h3 className="text-2xl font-bold mb-3 text-gradient">Commitment to Excellence</h3>
+          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
             These certifications represent my dedication to continuous learning and staying updated 
-            with the latest technologies and industry best practices. Each certification has enhanced 
-            my skills and contributed to my professional growth in the ever-evolving tech landscape.
+            with the latest technologies and industry best practices.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.div 
-              className="space-y-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div 
-                className="text-4xl font-bold text-primary"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {15}+
-              </motion.div>
-              <div className="text-sm text-muted-foreground font-medium">Total Certifications</div>
-            </motion.div>
-            
-            <motion.div 
-              className="space-y-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div 
-                className="text-4xl font-bold text-accent"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              >
-                {categories.length}
-              </motion.div>
-              <div className="text-sm text-muted-foreground font-medium">Different Categories</div>
-            </motion.div>
-            
-            <motion.div 
-              className="space-y-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div 
-                className="text-4xl font-bold text-success"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              >
-                2025
-              </motion.div>
-              <div className="text-sm text-muted-foreground font-medium">Most Recent Year</div>
-            </motion.div>
+          <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto">
+            <div className="space-y-1">
+              <div className="text-3xl font-bold text-primary">{certifications.length}</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground font-medium">Total Credentials</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl font-bold text-accent">{categories.length - 1}</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground font-medium">Topic Categories</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl font-bold text-success">2025</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground font-medium">Latest Updated</div>
+            </div>
           </div>
         </motion.div>
 
-        {/* View All Certifications Button */}
+        {/* View All Button */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex justify-center mt-12"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex justify-center mt-10"
         >
-          <motion.a
+          <a
             href="https://drive.google.com/drive/u/1/folders/1RRcuuXe9Zd_YyRo1LenabGwUnJAeFjmd"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ 
-              scale: 1.05, 
-              y: -5,
-              boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
-            }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-primary via-accent to-success text-primary-foreground font-bold text-lg rounded-2xl shadow-2xl overflow-hidden transform-gpu"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary via-accent to-success text-primary-foreground font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-primary/20"
           >
-            {/* Animated background overlay */}
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              animate={{
-                x: ["-100%", "100%"]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            
-            {/* Pulsing indicator */}
-            <motion.div 
-              className="absolute -top-2 -right-2 w-6 h-6 bg-success rounded-full"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [1, 0.8, 1]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-            />
-            
-            {/* Icon with rotation animation */}
-            <motion.div
-              whileHover={{ rotate: 15 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <FiExternalLink className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-            </motion.div>
-            
-            {/* Text content */}
-            <span className="relative z-10">View All My Certifications</span>
-            
-            {/* Arrow indicator */}
-            <motion.div
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <FiChevronRight className="w-5 h-5" />
-            </motion.div>
-            
-            {/* Shine effect */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
-              animate={{
-                x: ["-200%", "200%"]
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5
-              }}
-            />
-          </motion.a>
+            <FiExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
+            <span>View All My Certifications</span>
+            <FiChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
         </motion.div>
       </div>
     </section>

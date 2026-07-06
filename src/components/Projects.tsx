@@ -1,12 +1,30 @@
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiCode, FiStar, FiDownload, FiPackage } from 'react-icons/fi';
-import { SiPython, SiStreamlit, SiFlask, SiScikitlearn, SiPandas, SiReact, SiPypi } from 'react-icons/si';
+import { SiPython, SiStreamlit, SiFlask, SiScikitlearn, SiPandas, SiReact, SiPypi, SiSpringboot, SiPostgresql, SiDocker, SiTypescript } from 'react-icons/si';
 import yourHealthyHeartImg from '@/assets/yourhealthyheart-project.png';
 import cinematchImg from '@/assets/cinematch-project.png';
 import pollutionExplorerImg from '@/assets/pollution-explorer-project.png';
+import splitwiseImg from '@/assets/splitwise-project.png';
 
 const Projects = () => {
   const projects = [
+    {
+      title: 'Splitwise Auditor - Expense & Anomaly Engine',
+      description: 'A full-stack roommate expense management system featuring strategy pattern splits and a database-backed dynamic exchange rate calculator.',
+      longDescription: 'Developed a robust platform with a min-max greedy debt simplification algorithm to settle accounts in minimal transactions, custom dark glassmorphic UI, JWT auth, and an intelligent CSV data auditor identifying 10 anomaly types.',
+      tech: [
+        { name: 'React', icon: SiReact, color: 'text-cyan-400' },
+        { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-500' },
+        { name: 'Spring Boot', icon: SiSpringboot, color: 'text-green-500' },
+        { name: 'PostgreSQL', icon: SiPostgresql, color: 'text-blue-400' },
+        { name: 'Docker', icon: SiDocker, color: 'text-cyan-500' }
+      ],
+      github: 'https://github.com/27Naman2004/splitwise',
+      demo: 'https://splitwise-swart-omega.vercel.app/',
+      image: splitwiseImg,
+      category: 'Full-stack Development',
+      date: 'July 2026'
+    },
     {
       title: 'YourHealthyHeart - Heart Disease Prediction',
       description: 'A Streamlit web application utilizing machine learning to predict heart disease risk with live accuracy comparisons between Logistic Regression and Decision Tree models.',
