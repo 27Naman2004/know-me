@@ -88,7 +88,7 @@ const CodingProfiles = () => {
             easyQuestions: ltJson.totalEasy || 800,
             mediumQuestions: ltJson.totalMedium || 1600,
             hardQuestions: ltJson.totalHard || 900,
-            acceptanceRate: 58.7,
+            acceptanceRate: 72.7,
             ranking: ltJson.ranking || 108174,
             submissionCalendar: ltJson.submissionCalendar || {},
             recentSubmissions: recent
@@ -121,7 +121,7 @@ const CodingProfiles = () => {
           easyQuestions: 800,
           mediumQuestions: 1600,
           hardQuestions: 900,
-          acceptanceRate: 58.7,
+          acceptanceRate: 72.7,
           ranking: 142385,
           submissionCalendar: mockCalendar,
           recentSubmissions: [
