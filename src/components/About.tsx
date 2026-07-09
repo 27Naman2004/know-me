@@ -43,16 +43,16 @@ const About = () => {
     <section id="about" className="py-20 relative overflow-hidden">
 
       {/* Background */}
-      <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-float" />
-      <div className="absolute bottom-20 left-20 w-80 h-80 rounded-full bg-accent/10 blur-3xl animate-float-delayed" />
+      <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-float will-change-gpu pointer-events-none" />
+      <div className="absolute bottom-20 left-20 w-80 h-80 rounded-full bg-accent/10 blur-3xl animate-float-delayed will-change-gpu pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -68,15 +68,15 @@ const About = () => {
 
           {/* Left Section */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
 
             {/* Bio */}
-            <div className="card-glass p-8">
+            <div className="card-glass p-8 will-change-gpu">
               <h3 className="text-2xl font-bold mb-6 text-gradient">My Journey</h3>
 
               <div className="space-y-4 text-muted-foreground">
@@ -87,9 +87,9 @@ const About = () => {
                 </p>
 
                 <p>
-                  My interests span across <span className="text-accent">Machine Learning</span>,
-                  <span className="text-primary"> Data Science</span>, and
-                  <span className="text-success"> Full-Stack Web Development</span>.
+                  My interests span across <span className="text-accent font-medium">Machine Learning</span>,
+                  <span className="text-primary font-medium"> Data Science</span>, and
+                  <span className="text-success font-medium"> Full-Stack Web Development</span>.
                 </p>
 
                 <p>
@@ -98,12 +98,12 @@ const About = () => {
               </div>
 
               {/* Contact */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex items-center space-x-3">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-card-border pt-6">
+                <div className="flex items-center space-x-3 text-muted-foreground hover:text-accent transition-colors duration-300">
                   <FiMapPin className="text-accent" size={20} />
                   <span className="text-sm">Gwalior, MP, India</span>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 text-muted-foreground hover:text-primary transition-colors duration-300">
                   <FiCalendar className="text-primary" size={20} />
                   <span className="text-sm">Available for opportunities</span>
                 </div>
@@ -115,89 +115,129 @@ const About = () => {
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card-glass p-6 text-center"
+                  className="card-glass p-6 text-center will-change-gpu"
                 >
                   <div className="text-3xl font-bold text-gradient mb-2">
                     {stat.number}{stat.suffix}
                   </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right Section - Education */}
+          {/* Right Section - Education Pathway */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-8 relative"
           >
+            <h3 className="text-2xl font-bold mb-6 text-gradient">Education Pathway</h3>
 
-            <h3 className="text-2xl font-bold mb-6 text-gradient">Education</h3>
-
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="card-glass p-6 relative overflow-hidden"
-              >
-                <div className="flex items-start space-x-4">
-
-                  <div className={`p-3 rounded-xl ${edu.color} bg-opacity-20`}>
-                    <edu.icon className="text-2xl" />
+            <div className="relative pl-8 border-l border-muted/30 ml-4 space-y-8">
+              {education.map((edu, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  className="relative group card-glass p-6 will-change-gpu"
+                >
+                  {/* Timeline Glowing Node */}
+                  <div className="absolute -left-[41px] top-6 w-5 h-5 rounded-full bg-card border-2 border-accent flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-125 z-10">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                   </div>
 
-                  <div className="flex-1">
-                    <h4 className="text-xl font-semibold mb-2">{edu.degree}</h4>
-                    <p className="text-accent font-medium mb-1">{edu.field}</p>
-
-                    <p className="text-muted-foreground mb-1">{edu.institution}</p>
-
-                    {/* ✅ LOCATION ADDED */}
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                      <FiMapPin className="text-accent" size={14} />
-                      <span>{getLocation(edu.institution)}</span>
+                  <div className="flex items-start space-x-4">
+                    <div className={`p-3 rounded-xl ${edu.color} bg-opacity-20 flex-shrink-0 text-foreground`}>
+                      <edu.icon className="text-2xl" />
                     </div>
 
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">{edu.year}</span>
-                      <span className="px-3 py-1 bg-gradient-primary text-primary-foreground rounded-full text-sm font-medium">
-                        {edu.grade}
-                      </span>
+                    <div className="flex-1">
+                      <h4 className="text-xl font-bold mb-1 group-hover:text-accent transition-colors duration-200">
+                        {edu.degree}
+                      </h4>
+                      <p className="text-accent font-medium mb-1 text-sm">{edu.field}</p>
+                      <p className="text-muted-foreground text-sm mb-2">{edu.institution}</p>
+
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
+                        <FiMapPin className="text-accent" size={12} />
+                        <span>{getLocation(edu.institution)}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center border-t border-card-border pt-4 mt-2">
+                        <span className="text-xs text-muted-foreground font-mono">{edu.year}</span>
+                        <span className="px-3 py-1 bg-gradient-primary text-primary-foreground rounded-full text-xs font-bold shadow-md">
+                          {edu.grade}
+                        </span>
+                      </div>
                     </div>
+                  </div>
+
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-primary opacity-5 rounded-full blur-xl pointer-events-none" />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Academic Domain Focus Area Visualization */}
+            <div className="card-glass p-6 will-change-gpu">
+              <h4 className="text-lg font-bold mb-4 text-gradient">Academic Focus Breakdown</h4>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-1.5">
+                    <span className="font-semibold text-foreground">Machine Learning & Data Science</span>
+                    <span className="font-mono text-accent font-semibold">60%</span>
+                  </div>
+                  <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 0.6 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, ease: 'easeOut' }}
+                      className="h-full bg-gradient-accent origin-left rounded-full"
+                    />
                   </div>
                 </div>
 
-
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-primary opacity-10 rounded-full blur-xl" />
-
-              </motion.div>
-            ))}
-            <h4 className="text-lg font-semibold mb-4 text-gradient">Quick Facts</h4>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Current Year</span>
-                <span className="font-medium">3rd Year (5th Semester)</span>
+                <div>
+                  <div className="flex justify-between text-sm mb-1.5">
+                    <span className="font-semibold text-foreground">Full-Stack Software Development</span>
+                    <span className="font-mono text-primary font-semibold">40%</span>
+                  </div>
+                  <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 0.4 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, ease: 'easeOut' }}
+                      className="h-full bg-gradient-primary origin-left rounded-full"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Graduation</span>
-                <span className="font-medium">2027</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Focus Areas</span>
-                <span className="font-medium">ML & Web Dev</span>
+
+              <div className="grid grid-cols-3 gap-2 mt-6 border-t border-card-border pt-4 text-center">
+                <div className="text-xs text-muted-foreground font-medium">
+                  <div className="font-bold text-foreground">3rd Year</div>
+                  Current Year
+                </div>
+                <div className="text-xs text-muted-foreground font-medium border-x border-card-border">
+                  <div className="font-bold text-foreground">2027</div>
+                  Graduation Year
+                </div>
+                <div className="text-xs text-muted-foreground font-medium">
+                  <div className="font-bold text-foreground">8.3 CGPA</div>
+                  Grade
+                </div>
               </div>
             </div>
-
           </motion.div>
         </div>
       </div>

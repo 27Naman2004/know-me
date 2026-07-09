@@ -129,15 +129,15 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute top-20 left-20 w-80 h-80 rounded-full bg-accent/20 blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-20 w-72 h-72 rounded-full bg-primary/20 blur-3xl animate-float-delayed" />
+      <div className="absolute top-20 left-20 w-80 h-80 rounded-full bg-accent/15 blur-3xl animate-float will-change-gpu pointer-events-none" />
+      <div className="absolute bottom-20 right-20 w-72 h-72 rounded-full bg-primary/15 blur-3xl animate-float-delayed will-change-gpu pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -153,11 +153,11 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="space-y-8 will-change-gpu"
           >
             <div>
               <h3 className="text-2xl font-bold mb-6 text-gradient">
@@ -172,14 +172,10 @@ const Contact = () => {
 
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
-                <motion.a
+                <a
                   key={index}
                   href={info.href}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex items-center space-x-4 p-4 card-glass rounded-xl hover:border-accent transition-all duration-300 group"
+                  className="flex items-center space-x-4 p-4 card-glass rounded-xl hover:border-accent transition-all duration-300 group select-none"
                 >
                   <div
                     className={`p-3 rounded-xl bg-card-secondary border border-card-border ${info.color} group-hover:scale-110 transition-transform duration-300`}
@@ -187,45 +183,41 @@ const Contact = () => {
                     <info.icon size={20} />
                   </div>
                   <div>
-                    <div className="font-medium text-sm text-muted-foreground">
+                    <div className="font-medium text-xs text-muted-foreground uppercase tracking-wider mb-0.5">
                       {info.title}
                     </div>
-                    <div className="font-semibold group-hover:text-accent transition-colors duration-300">
+                    <div className="font-bold group-hover:text-accent transition-colors duration-300">
                       {info.value}
                     </div>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Social Links */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-semibold text-gradient">
+            {/* Social Links - Optimized static list */}
+            <div className="space-y-4 pt-4 border-t border-card-border">
+              <h4 className="text-lg font-bold text-gradient">
                 Connect on Social
               </h4>
               <div className="space-y-3">
                 {socialLinks.map((social, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                    className={`flex items-center space-x-4 p-4 card-glass rounded-xl transition-all duration-300 group ${social.color}`}
+                    className={`flex items-center space-x-4 p-4 card-glass rounded-xl transition-all duration-300 group hover:border-accent ${social.color}`}
                   >
                     <div className="p-3 rounded-xl bg-card-secondary border border-card-border group-hover:scale-110 transition-transform duration-300">
                       <social.icon size={20} />
                     </div>
                     <div>
-                      <div className="font-medium">{social.name}</div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="font-bold text-foreground group-hover:text-accent transition-colors duration-300">{social.name}</div>
+                      <div className="text-sm text-muted-foreground mt-0.5">
                         {social.username}
                       </div>
                     </div>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>
@@ -233,11 +225,11 @@ const Contact = () => {
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="card-glass p-8"
+            className="card-glass p-8 will-change-gpu"
           >
             <h3 className="text-2xl font-bold mb-6 text-gradient">
               Send a Message
@@ -245,14 +237,9 @@ const Contact = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                >
-                  <label className="flex items-center text-sm font-medium mb-2">
-                    <FiUser className="mr-2" size={16} />
+                <div>
+                  <label className="flex items-center text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wider">
+                    <FiUser className="mr-2 text-accent" size={16} />
                     Name
                   </label>
                   <input
@@ -261,19 +248,14 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-card border border-card-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 bg-card border border-card-border rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 text-foreground"
                     placeholder="Your full name"
                   />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                >
-                  <label className="flex items-center text-sm font-medium mb-2">
-                    <FiMail className="mr-2" size={16} />
+                <div>
+                  <label className="flex items-center text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wider">
+                    <FiMail className="mr-2 text-primary" size={16} />
                     Email
                   </label>
                   <input
@@ -282,20 +264,15 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-card border border-card-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 bg-card border border-card-border rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 text-foreground"
                     placeholder="your.email@example.com"
                   />
-                </motion.div>
+                </div>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-              >
-                <label className="flex items-center text-sm font-medium mb-2">
-                  <FiMessageSquare className="mr-2" size={16} />
+              <div>
+                <label className="flex items-center text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wider">
+                  <FiMessageSquare className="mr-2 text-accent" size={16} />
                   Subject
                 </label>
                 <input
@@ -304,19 +281,14 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-card border border-card-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-3 bg-card border border-card-border rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 text-foreground"
                   placeholder="What's this about?"
                 />
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-              >
-                <label className="flex items-center text-sm font-medium mb-2">
-                  <FiMessageSquare className="mr-2" size={16} />
+              <div>
+                <label className="flex items-center text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wider">
+                  <FiMessageSquare className="mr-2 text-primary" size={16} />
                   Message
                 </label>
                 <textarea
@@ -325,21 +297,17 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-card border border-card-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-card border border-card-border rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 resize-none text-foreground"
                   placeholder="Tell me more about your project or idea..."
                 />
-              </motion.div>
+              </div>
 
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.5 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full btn-hero flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full btn-hero flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed will-change-gpu shadow-md font-bold"
               >
                 {isSubmitting ? (
                   <>
@@ -359,27 +327,27 @@ const Contact = () => {
 
         {/* Additional CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-16 text-center"
         >
-          <div className="card-glass p-8">
+          <div className="card-glass p-8 will-change-gpu">
             <FiCheck className="text-4xl text-success mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-4 text-gradient">
               Ready to Collaborate?
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
               I'm currently open to new opportunities and exciting projects.
               Let's build something amazing together!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
                 href="mailto:katare2004@gmail.com"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-hero inline-flex items-center gap-2"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="btn-hero inline-flex items-center gap-2 will-change-gpu shadow-md"
               >
                 <FiMail size={20} />
                 Email Me Directly
@@ -387,9 +355,9 @@ const Contact = () => {
               <motion.a
                 href="/resume.pdf"
                 download="Naman_Katare_Resume.pdf"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-secondary inline-flex items-center gap-2"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="btn-secondary inline-flex items-center gap-2 will-change-gpu"
               >
                 <FiUser size={20} />
                 Download Resume

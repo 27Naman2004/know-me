@@ -35,11 +35,11 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-noise">
-        <div className="absolute inset-0 bg-gradient-hero opacity-20" />
-        <div className="absolute top-20 left-20 w-72 h-72 rounded-full bg-primary/20 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-accent/20 blur-3xl animate-float-delayed" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-success/10 blur-3xl animate-pulse-glow" />
+      <div className="absolute inset-0 bg-noise pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-hero opacity-15" />
+        <div className="absolute top-20 left-20 w-72 h-72 rounded-full bg-primary/20 blur-3xl animate-float will-change-gpu" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-accent/20 blur-3xl animate-float-delayed will-change-gpu" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-success/10 blur-3xl animate-pulse-glow will-change-gpu" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -60,7 +60,7 @@ const Hero = () => {
               <HiLocationMarker className="text-accent mr-2" size={20} />
               <span className="text-muted-foreground">Gwalior, Madhya Pradesh, India</span>
             </motion.div>
-
+ 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ const Hero = () => {
               Hi, I'm{' '}
               <span className="text-gradient">Naman</span>
             </motion.h1>
-
+ 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ const Hero = () => {
               <span className="text-accent-gradient">B.Tech Student</span> | 
               <span className="text-gradient"> Aspiring Software Developer</span>
             </motion.div>
-
+ 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ const Hero = () => {
               Data Science, and Web Development. Currently building innovative solutions 
               with modern technologies and contributing to open-source projects.
             </motion.p>
-
+ 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const Hero = () => {
             >
               <button
                 onClick={handleDownloadResume}
-                className="btn-hero flex items-center justify-center gap-2"
+                className="btn-hero flex items-center justify-center gap-2 will-change-gpu"
               >
                 <FiDownload size={20} />
                 Download Resume
@@ -111,12 +111,12 @@ const Hero = () => {
                   e.preventDefault();
                   document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="btn-secondary flex items-center justify-center gap-2"
+                className="btn-secondary flex items-center justify-center gap-2 will-change-gpu"
               >
                 Get In Touch
               </a>
             </motion.div>
-
+ 
             {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -130,9 +130,9 @@ const Hero = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, y: -2 }}
+                  whileHover={{ scale: 1.15, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`p-3 rounded-full bg-card border border-card-border icon-glow transition-colors duration-300 ${link.color}`}
+                  className={`p-3 rounded-full bg-card border border-card-border icon-glow transition-colors duration-300 will-change-gpu ${link.color}`}
                   title={link.label}
                 >
                   <link.icon size={24} />
@@ -140,7 +140,7 @@ const Hero = () => {
               ))}
             </motion.div>
           </motion.div>
-
+ 
           {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -149,36 +149,48 @@ const Hero = () => {
             className="flex justify-center lg:justify-end"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="relative"
+              whileHover={{ scale: 1.03 }}
+              className="relative will-change-gpu"
             >
-              <div className="absolute inset-0 rounded-full bg-gradient-primary blur-2xl opacity-30 animate-pulse-glow" />
-              <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-gradient-primary shadow-glass-lg">
+              <div className="absolute inset-0 rounded-full bg-gradient-primary blur-2xl opacity-25 animate-pulse-glow will-change-gpu" />
+              <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-card-border shadow-glass-lg">
                 <motion.img
                   src={profileImage}
                   alt="Naman Katare"
                   className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.4 }}
                 />
               </div>
               {/* Floating particles */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-accent blur-sm animate-float" />
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 rounded-full bg-primary blur-sm animate-float-delayed" />
-              <div className="absolute top-1/2 -left-8 w-4 h-4 rounded-full bg-success blur-sm animate-pulse-glow" />
+              <div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-accent/40 blur-sm animate-float will-change-gpu" />
+              <div className="absolute -bottom-4 -left-4 w-6 h-6 rounded-full bg-primary/40 blur-sm animate-float-delayed will-change-gpu" />
+              <div className="absolute top-1/2 -left-8 w-4 h-4 rounded-full bg-success/30 blur-sm animate-pulse-glow will-change-gpu" />
             </motion.div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div>
+ 
+      {/* Scroll Down Indicator */}
+      <div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-10 hidden sm:flex"
+        onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })}
+      >
+        <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 font-medium select-none">Scroll Down</span>
         <motion.div
+          animate={{
+            y: [0, 6, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="w-5 h-8 rounded-full border border-muted-foreground/30 flex justify-center p-1"
         >
-          <motion.div
-          />
+          <div className="w-1.5 h-2 rounded-full bg-accent/80 animate-pulse" />
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };

@@ -32,6 +32,7 @@ const Footer = () => {
   const quickLinks = [
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Coding Stats', href: '#coding-profiles' },
     { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Certifications', href: '#certifications' },
@@ -47,11 +48,11 @@ const Footer = () => {
     <footer className="relative overflow-hidden">
       {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background-secondary via-background to-background-secondary" />
-      <div className="absolute inset-0 bg-noise opacity-5" />
+      <div className="absolute inset-0 bg-noise opacity-5 pointer-events-none" />
       
       {/* Floating elements */}
-      <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-primary/10 blur-3xl animate-float" />
-      <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-accent/10 blur-3xl animate-float-delayed" />
+      <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-primary/10 blur-3xl animate-float will-change-gpu pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-accent/10 blur-3xl animate-float-delayed will-change-gpu pointer-events-none" />
 
       <div className="relative z-10">
         {/* Main Footer Content */}
@@ -61,9 +62,9 @@ const Footer = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-2"
+              className="lg:col-span-2 will-change-gpu"
             >
               <div className="mb-6">
                 <h3 className="text-3xl font-bold text-gradient mb-4">Naman Katare</h3>
@@ -74,24 +75,19 @@ const Footer = () => {
                 </p>
               </div>
               
-              {/* Social Links */}
+              {/* Social Links - Optimized static list */}
               <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
+                {socialLinks.map((social) => (
+                  <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.2, y: -2 }}
-                    className={`p-3 rounded-full bg-card border border-card-border transition-all duration-300 ${social.color} icon-glow`}
+                    className={`p-3 rounded-full bg-card border border-card-border transition-all duration-300 hover:scale-110 hover:-translate-y-1 ${social.color} icon-glow select-none`}
                     aria-label={social.label}
                   >
                     <social.icon size={20} />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </motion.div>
@@ -100,30 +96,25 @@ const Footer = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="will-change-gpu"
             >
               <h4 className="text-lg font-semibold mb-6 text-gradient">Quick Links</h4>
               <ul className="space-y-3">
-                {quickLinks.map((link, index) => (
-                  <motion.li
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.2 + (index * 0.05) }}
-                  >
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
                     <a
                       href={link.href}
                       onClick={(e) => {
                         e.preventDefault();
                         scrollToSection(link.href);
                       }}
-                      className="text-muted-foreground hover:text-accent transition-colors duration-300 cursor-pointer block"
+                      className="text-muted-foreground hover:text-accent hover:translate-x-1 transition-all duration-200 cursor-pointer block text-sm"
                     >
                       {link.name}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </motion.div>
@@ -132,8 +123,9 @@ const Footer = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="will-change-gpu"
             >
               <h4 className="text-lg font-semibold mb-6 text-gradient">Get In Touch</h4>
               <div className="space-y-4">
@@ -141,20 +133,20 @@ const Footer = () => {
                   <p className="text-sm text-muted-foreground mb-1">Email</p>
                   <a
                     href="mailto:katare2004@gmail.com"
-                    className="text-accent hover:text-accent-glow transition-colors duration-300"
+                    className="text-accent hover:text-accent-glow transition-colors duration-300 font-medium"
                   >
                     katare2004@gmail.com
                   </a>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Location</p>
-                  <p className="text-foreground">Gwalior, MP, India</p>
+                  <p className="text-foreground text-sm font-medium">Gwalior, MP, India</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Status</p>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-success rounded-full mr-2 animate-pulse-glow" />
-                    <span className="text-success text-sm font-medium">Available for opportunities</span>
+                    <div className="w-2 h-2 bg-success rounded-full mr-2" />
+                    <span className="text-success text-sm font-semibold uppercase tracking-wider">Available for opportunities</span>
                   </div>
                 </div>
               </div>
@@ -169,8 +161,8 @@ const Footer = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col md:flex-row justify-between items-center py-6 space-y-4 md:space-y-0"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col md:flex-row justify-between items-center py-6 space-y-4 md:space-y-0 will-change-gpu"
             >
               <div className="flex items-center text-sm text-muted-foreground">
                 <span>© {currentYear} Naman Katare. Made with</span>
@@ -179,7 +171,7 @@ const Footer = () => {
                   transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
                   className="mx-1"
                 >
-                  <FiHeart className="text-red-400" size={14} />
+                  <FiHeart className="text-red-400 fill-red-400" size={14} />
                 </motion.div>
                 <span>using React & Tailwind CSS</span>
               </div>
@@ -192,7 +184,7 @@ const Footer = () => {
                   onClick={scrollToTop}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full bg-gradient-primary text-primary-foreground transition-all duration-300 hover:shadow-glow-primary"
+                  className="p-2.5 rounded-full bg-gradient-primary text-primary-foreground transition-all duration-300 hover:shadow-glow-primary will-change-gpu"
                   aria-label="Scroll to top"
                 >
                   <FiArrowUp size={16} />

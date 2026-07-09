@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { FiAward, FiCalendar, FiExternalLink, FiUser, FiStar, FiEye, FiChevronRight } from 'react-icons/fi';
-import { SiGoogle, SiCoursera, SiHackerrank, SiNvidia, SiPostman } from 'react-icons/si';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiAward, FiCalendar, FiExternalLink, FiUser, FiStar, FiEye, FiChevronRight, FiX } from 'react-icons/fi';
+import { SiGoogle, SiCoursera, SiHackerrank, SiNvidia, SiPostman } from 'react-icons/si';
 
 // Certificate images
 import oracleOciCert from '@/assets/certificates/oracle-oci-certificate.png';
@@ -13,10 +13,25 @@ import computerCommCert from '@/assets/certificates/computer-communications-cert
 import bitsBytesCert from '@/assets/certificates/bits-bytes-certificate.png';
 import postmanApiCert from '@/assets/certificates/postman-api-certificate.png';
 
+interface Certification {
+  title: string;
+  issuer: string;
+  date: string;
+  category: string;
+  icon: React.ComponentType<{ className?: string; size?: number }>;
+  color?: string;
+  bgColor?: string;
+  description: string;
+  skills: string[];
+  verificationLink: string;
+  certificateImage: string | null;
+}
+
 const Certifications = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [activeCert, setActiveCert] = useState<Certification | null>(null);
 
-  const certifications = [
+  const certifications: Certification[] = [
     {
       title: 'OCI Data Science',
       issuer: 'Oracle',
@@ -169,13 +184,13 @@ const Certifications = () => {
     : certifications;
 
   return (
-    <section id="certifications" className="py-20 relative overflow-hidden">
+    <section id="certifications" className="py-20 relative overflow-hidden contain-section">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5" />
-        <div className="absolute top-10 right-10 w-96 h-96 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 blur-3xl opacity-50 animate-float" />
-        <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-gradient-to-r from-success/20 to-warning/20 blur-3xl opacity-50 animate-float-delayed" />
-        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgba(255,255,255,0.15)_1px,_transparent_0)] bg-[size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5 opacity-40" />
+        <div className="absolute top-10 right-10 w-96 h-96 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 blur-3xl opacity-40 animate-float will-change-gpu" />
+        <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-gradient-to-r from-success/10 to-warning/10 blur-3xl opacity-40 animate-float-delayed will-change-gpu" />
+        <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(circle_at_1px_1px,_rgba(255,255,255,0.15)_1px,_transparent_0)] bg-[size:20px_20px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -183,14 +198,14 @@ const Certifications = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <div className="inline-block mb-4">
             <div className="flex items-center justify-center space-x-2 text-accent mb-2">
               <FiAward size={20} className="animate-pulse" />
-              <span className="text-sm font-medium tracking-wider uppercase">Professional Certifications</span>
+              <span className="text-sm font-semibold tracking-wider uppercase">Professional Certifications</span>
             </div>
           </div>
           
@@ -209,7 +224,7 @@ const Certifications = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-12"
         >
@@ -223,16 +238,16 @@ const Certifications = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category === 'All' ? null : category)}
-                className={`p-4 text-center rounded-xl border transition-all duration-300 hover:scale-[1.02] flex flex-col justify-center items-center gap-1 ${
+                className={`p-4 text-center rounded-xl border transition-all duration-300 hover:scale-[1.02] flex flex-col justify-center items-center gap-1 will-change-gpu ${
                   isActive 
-                    ? 'border-accent bg-accent/10 shadow-lg shadow-accent/5' 
-                    : 'card-glass hover:border-primary/40'
+                    ? 'border-accent bg-accent/10 shadow-lg shadow-accent/5 text-accent' 
+                    : 'card-glass hover:border-primary/40 text-foreground'
                 }`}
               >
                 <div className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-accent' : 'text-gradient'}`}>
                   {count}
                 </div>
-                <div className="text-xs text-muted-foreground font-medium">
+                <div className="text-xs text-muted-foreground font-semibold">
                   {category}
                 </div>
               </button>
@@ -240,8 +255,8 @@ const Certifications = () => {
           })}
         </motion.div>
 
-        {/* Certifications Horizontal Scrollable Row */}
-        <div className="relative min-h-[480px]">
+        {/* Certifications Horizontal Scrollable Row - Lightweight, fast scrolling */}
+        <div className="relative min-h-[320px]">
           {/* Scroll indicators/shadow gradients */}
           <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
@@ -250,48 +265,32 @@ const Certifications = () => {
             {filteredCertifications.map((cert, index) => (
               <motion.div
                 key={cert.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group flex-shrink-0 w-80 snap-start card-glass p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl flex flex-col justify-between min-h-[460px] cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: index * 0.04 }}
+                onClick={() => setActiveCert(cert)}
+                className="group flex-shrink-0 w-80 snap-start card-glass p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl flex flex-col justify-between min-h-[300px] cursor-pointer will-change-gpu"
               >
                 <div>
                   {/* Header */}
                   <div className="flex items-start justify-between mb-4">
-                    <div className={`p-3 rounded-xl ${cert.bgColor} bg-opacity-20 flex-shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6`}>
-                      <cert.icon className={`text-2xl ${cert.color}`} />
+                    <div className={`p-3 rounded-xl ${cert.bgColor || 'bg-primary'} bg-opacity-20 flex-shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6`}>
+                      <cert.icon className={`text-2xl ${cert.color || 'text-primary'}`} />
                     </div>
                     <div className="text-right ml-4">
-                      <span className="text-[10px] md:text-xs text-accent font-medium px-2 py-0.5 bg-accent/10 rounded-full inline-block">
+                      <span className="text-[10px] text-accent font-semibold px-2 py-0.5 bg-accent/10 rounded-full inline-block uppercase tracking-wider">
                         {cert.category}
                       </span>
-                      <div className="flex items-center text-xs text-muted-foreground mt-1 justify-end">
+                      <div className="flex items-center text-xs text-muted-foreground mt-1.5 justify-end">
                         <FiCalendar className="mr-1 flex-shrink-0" size={11} />
                         {cert.date}
                       </div>
                     </div>
                   </div>
 
-                  {/* Certificate Image */}
-                  {cert.certificateImage && (
-                    <div className="mb-4 relative aspect-[4/3] rounded-lg overflow-hidden border border-card-border shadow-sm">
-                      <img 
-                        src={cert.certificateImage} 
-                        alt={`${cert.title} Certificate`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="bg-white/10 backdrop-blur-sm rounded-full p-2.5 transition-transform duration-300 translate-y-3 group-hover:translate-y-0">
-                          <FiEye className="text-white text-lg" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
                   {/* Details */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 mb-4">
                     <h3 className="text-lg font-bold group-hover:text-accent transition-colors duration-300 line-clamp-2 leading-tight">
                       {cert.title}
                     </h3>
@@ -307,35 +306,28 @@ const Certifications = () => {
                   </div>
                 </div>
 
-                {/* Footer and verification */}
-                <div className="mt-4 pt-2">
+                {/* Footer skills - no image render keeps this row extremely responsive */}
+                <div>
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {cert.skills.map((skill) => (
+                    {cert.skills.slice(0, 3).map((skill) => (
                       <span
                         key={skill}
-                        className="px-2 py-0.5 bg-muted rounded-full text-[10px] font-medium text-muted-foreground transition-colors duration-200 group-hover:bg-accent/10 group-hover:text-accent"
+                        className="px-2 py-0.5 bg-muted rounded-full text-[10px] font-medium text-muted-foreground"
                       >
                         {skill}
                       </span>
                     ))}
+                    {cert.skills.length > 3 && (
+                      <span className="px-2 py-0.5 bg-muted rounded-full text-[10px] font-medium text-muted-foreground">
+                        +{cert.skills.length - 3} more
+                      </span>
+                    )}
                   </div>
 
-                  {cert.verificationLink && cert.verificationLink !== '#' ? (
-                    <a
-                      href={cert.verificationLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-accent/20 hover:border-primary/40 hover:shadow-lg text-primary"
-                    >
-                      <FiExternalLink size={13} />
-                      <span>Verify Certificate</span>
-                    </a>
-                  ) : (
-                    <div className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-muted/30 border border-transparent rounded-lg text-sm font-medium text-muted-foreground cursor-default">
-                      <FiEye size={13} className="opacity-60" />
-                      <span>Certificate Available</span>
-                    </div>
-                  )}
+                  <div className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-xl text-sm font-bold text-primary group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300">
+                    <FiEye size={14} />
+                    <span>View Credential</span>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -344,9 +336,9 @@ const Certifications = () => {
 
         {/* Scroll Instruction */}
         <div className="text-center mt-6">
-          <div className="inline-flex items-center space-x-2 text-xs text-muted-foreground bg-card-glass px-4 py-2 rounded-full border border-card-border animate-pulse">
+          <div className="inline-flex items-center space-x-2 text-xs text-muted-foreground bg-card px-4 py-2 rounded-full border border-card-border">
             <span>Scroll horizontally to view more certifications</span>
-            <FiChevronRight size={14} />
+            <FiChevronRight size={14} className="animate-pulse" />
           </div>
         </div>
 
@@ -354,11 +346,11 @@ const Certifications = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 card-glass p-8 text-center relative overflow-hidden"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mt-16 card-glass p-8 text-center relative overflow-hidden will-change-gpu"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5 opacity-50 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5 opacity-30 pointer-events-none" />
           
           <FiAward className="text-4xl text-accent mx-auto mb-4" />
           
@@ -368,18 +360,18 @@ const Certifications = () => {
             with the latest technologies and industry best practices.
           </p>
           
-          <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto border-t border-card-border pt-6">
             <div className="space-y-1">
               <div className="text-3xl font-bold text-primary">{certifications.length}</div>
-              <div className="text-[10px] md:text-xs text-muted-foreground font-medium">Total Credentials</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground font-semibold uppercase tracking-wider">Total Credentials</div>
             </div>
             <div className="space-y-1">
               <div className="text-3xl font-bold text-accent">{categories.length - 1}</div>
-              <div className="text-[10px] md:text-xs text-muted-foreground font-medium">Topic Categories</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground font-semibold uppercase tracking-wider">Topic Categories</div>
             </div>
             <div className="space-y-1">
               <div className="text-3xl font-bold text-success">2025</div>
-              <div className="text-[10px] md:text-xs text-muted-foreground font-medium">Latest Updated</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground font-semibold uppercase tracking-wider">Latest Updated</div>
             </div>
           </div>
         </motion.div>
@@ -388,15 +380,15 @@ const Certifications = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="flex justify-center mt-10"
         >
           <a
             href="https://drive.google.com/drive/u/1/folders/1RRcuuXe9Zd_YyRo1LenabGwUnJAeFjmd"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary via-accent to-success text-primary-foreground font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-primary/20"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary via-accent to-success text-primary-foreground font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-primary/20 will-change-gpu"
           >
             <FiExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
             <span>View All My Certifications</span>
@@ -404,6 +396,114 @@ const Certifications = () => {
           </a>
         </motion.div>
       </div>
+
+      {/* Certificate Viewer Modal - Lazy Loaded, dynamically displayed */}
+      <AnimatePresence>
+        {activeCert && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveCert(null)}
+              className="absolute inset-0 bg-background/85 backdrop-blur-md cursor-zoom-out"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="relative w-full max-w-xl bg-card border border-card-border p-6 rounded-2xl shadow-2xl z-10 max-h-[90vh] overflow-y-auto scrollbar-thin will-change-transform flex flex-col justify-between"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setActiveCert(null)}
+                className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground rounded-full bg-muted/40 transition-colors duration-200"
+                aria-label="Close modal"
+              >
+                <FiX size={20} />
+              </button>
+
+              <div>
+                {/* Header */}
+                <div className="mb-4 pr-8">
+                  <span className="px-2.5 py-0.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-[10px] font-bold uppercase tracking-wider">
+                    {activeCert.category}
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-extrabold mt-2 mb-1 text-foreground leading-tight">
+                    {activeCert.title}
+                  </h3>
+                  <div className="flex items-center text-xs text-muted-foreground mt-1">
+                    <FiUser className="mr-1" />
+                    <span>Issued by {activeCert.issuer}</span>
+                    <span className="mx-2">•</span>
+                    <FiCalendar className="mr-1" />
+                    <span>{activeCert.date}</span>
+                  </div>
+                </div>
+
+                {/* Certificate Image - Lazy loaded inside Modal */}
+                {activeCert.certificateImage ? (
+                  <div className="mb-4 relative aspect-[4/3] rounded-lg overflow-hidden border border-card-border shadow-inner bg-muted flex items-center justify-center">
+                    <img 
+                      src={activeCert.certificateImage} 
+                      alt={`${activeCert.title} Certificate`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="mb-4 relative aspect-[4/3] rounded-lg overflow-hidden border border-card-border bg-muted flex flex-col items-center justify-center text-muted-foreground p-6 text-center">
+                    <FiAward size={48} className="text-accent mb-2 animate-pulse" />
+                    <span className="text-sm font-semibold">Verification Record Available</span>
+                    <span className="text-xs max-w-xs mt-1">This credential is verified online. Click below to inspect credentials.</span>
+                  </div>
+                )}
+
+                {/* Description */}
+                <div className="space-y-3 mb-6">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {activeCert.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {activeCert.skills.map((skill: string) => (
+                      <span
+                        key={skill}
+                        className="px-2.5 py-0.5 bg-muted rounded-full text-xs font-semibold text-muted-foreground"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-3 border-t border-card-border pt-4">
+                {activeCert.verificationLink && activeCert.verificationLink !== '#' ? (
+                  <a
+                    href={activeCert.verificationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-primary text-primary-foreground rounded-xl text-sm font-bold shadow-md hover:opacity-95 transition-opacity"
+                  >
+                    <FiExternalLink size={14} />
+                    <span>Verify Credential Certificate</span>
+                  </a>
+                ) : (
+                  <div className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-muted/30 border border-transparent rounded-xl text-sm font-semibold text-muted-foreground cursor-default">
+                    <FiEye size={14} className="opacity-60" />
+                    <span>Digital Credential Verified</span>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -9,43 +9,43 @@
 
 @layer base {
   :root {
-    /* Background System - Deep tech gradients */
-    --background: 222 47% 4%;
-    --background-secondary: 228 39% 7%;
+    /* Background System - Deep premium tech gradients */
+    --background: 224 25% 4%;
+    --background-secondary: 224 25% 7%;
     --foreground: 210 40% 98%;
 
-    /* Card System - Glassmorphism with glow */
-    --card: 230 25% 8%;
-    --card-secondary: 225 20% 12%;
+    /* Card System - Elegant Glassmorphism with deep glow */
+    --card: 224 20% 8%;
+    --card-secondary: 224 18% 12%;
     --card-foreground: 210 40% 98%;
-    --card-border: 240 20% 20%;
+    --card-border: 224 15% 16%;
 
-    /* Primary Brand - Electric Blue to Purple */
-    --primary: 237 92% 58%;
-    --primary-glow: 252 100% 70%;
+    /* Primary Brand - Sophisticated Indigo/Violet */
+    --primary: 250 84% 65%;
+    --primary-glow: 260 90% 75%;
     --primary-foreground: 210 40% 98%;
 
-    /* Accent Colors - Vibrant Cyan */
-    --accent: 189 100% 56%;
-    --accent-glow: 189 100% 70%;
-    --accent-foreground: 222 47% 4%;
+    /* Accent Colors - Aurora Mint/Teal */
+    --accent: 174 86% 53%;
+    --accent-glow: 174 86% 72%;
+    --accent-foreground: 224 25% 4%;
 
-    /* Success/Skills - Emerald Green */
-    --success: 142 100% 60%;
-    --success-glow: 142 100% 75%;
+    /* Success/Skills - Emerald Mint */
+    --success: 150 80% 55%;
+    --success-glow: 150 80% 72%;
 
-    /* Warning/Experience - Golden Yellow */
-    --warning: 45 100% 60%;
-    --warning-glow: 45 100% 75%;
+    /* Warning/Experience - Premium Amber Orange */
+    --warning: 32 95% 60%;
+    --warning-glow: 32 95% 75%;
 
     /* Semantic Colors */
-    --muted: 217 25% 15%;
-    --muted-foreground: 217 10% 65%;
-    --border: 240 15% 20%;
-    --input: 240 15% 20%;
-    --ring: 237 92% 58%;
+    --muted: 224 16% 12%;
+    --muted-foreground: 217 12% 70%;
+    --border: 224 15% 16%;
+    --input: 224 15% 16%;
+    --ring: 250 84% 65%;
 
-    /* Gradients - Stunning backgrounds */
+    /* Gradients - Premium, smooth, non-harsh */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary-glow)) 100%);
@@ -53,57 +53,57 @@
     --gradient-skill: linear-gradient(90deg, hsl(var(--success)), hsl(var(--success-glow)));
 
     /* Shadows & Glows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
-    --glow-primary: 0 0 20px hsl(var(--primary) / 0.5);
-    --glow-accent: 0 0 20px hsl(var(--accent) / 0.5);
-    --glow-success: 0 0 20px hsl(var(--success) / 0.4);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 22px 50px rgba(0, 0, 0, 0.6);
+    --glow-primary: 0 0 25px hsl(var(--primary) / 0.35);
+    --glow-accent: 0 0 25px hsl(var(--accent) / 0.35);
+    --glow-success: 0 0 25px hsl(var(--success) / 0.3);
 
     /* Animation Properties */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --radius: 1rem;
+    --radius: 1.25rem;
   }
 
   .dark {
-    /* Enhanced dark mode with deeper contrasts */
-    --background: 222 47% 2%;
-    --background-secondary: 228 39% 4%;
-    --card: 230 25% 6%;
-    --card-secondary: 225 20% 9%;
-    --muted: 217 25% 12%;
-    --border: 240 15% 15%;
-    --input: 240 15% 15%;
+    /* Enhanced dark mode details */
+    --background: 224 25% 3%;
+    --background-secondary: 224 25% 6%;
+    --card: 224 20% 6%;
+    --card-secondary: 224 18% 10%;
+    --muted: 224 16% 10%;
+    --border: 224 15% 12%;
+    --input: 224 15% 12%;
   }
 
   /* Light theme overrides */
   .light {
     /* Light Background System */
-    --background: 0 0% 98%;
-    --background-secondary: 210 40% 95%;
-    --foreground: 222 47% 11%;
+    --background: 210 40% 98%;
+    --background-secondary: 210 40% 94%;
+    --foreground: 224 25% 8%;
 
     /* Light Card System */
     --card: 0 0% 100%;
     --card-secondary: 210 40% 96%;
-    --card-foreground: 222 47% 11%;
-    --card-border: 214 31% 91%;
+    --card-foreground: 224 25% 8%;
+    --card-border: 214 32% 90%;
 
     /* Adjusted colors for light mode */
     --primary-foreground: 0 0% 98%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 224 25% 8%;
 
     /* Light Semantic Colors */
-    --muted: 210 40% 92%;
-    --muted-foreground: 215 16% 47%;
-    --border: 214 31% 91%;
-    --input: 214 31% 91%;
+    --muted: 210 40% 90%;
+    --muted-foreground: 215 16% 45%;
+    --border: 214 32% 90%;
+    --input: 214 32% 90%;
 
     /* Light mode shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -118,8 +118,18 @@
 
   body {
     @apply bg-background text-foreground font-inter;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Fixed pseudo-element background prevents scrolling repaint lag completely */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -10;
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background-secondary)) 100%);
-    background-attachment: fixed;
+    pointer-events: none;
   }
 
   /* Custom Scrollbar */
@@ -266,6 +276,17 @@
 }
 
 @layer utilities {
+  .will-change-gpu {
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+
+  .contain-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
+  }
+
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   }
@@ -285,24 +306,24 @@
   }
 }
 
-/* Keyframe Animations */
+/* Keyframe Animations - Hardware Accelerated */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-10px) translate3d(0, 0, 0);
   }
 }
 
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translate3d(0, 0, 0);
   }
   50% {
     opacity: 0.8;
-    transform: scale(1.05);
+    transform: scale(1.05) translate3d(0, 0, 0);
   }
 }
 
