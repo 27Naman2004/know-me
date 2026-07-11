@@ -370,7 +370,7 @@ const Certifications = () => {
               <div className="text-[10px] md:text-xs text-muted-foreground font-semibold uppercase tracking-wider">Topic Categories</div>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl font-bold text-success">2025</div>
+              <div className="text-3xl font-bold text-success">2026</div>
               <div className="text-[10px] md:text-xs text-muted-foreground font-semibold uppercase tracking-wider">Latest Updated</div>
             </div>
           </div>
