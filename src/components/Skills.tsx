@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import { 
-  SiPython, SiJavascript, SiReact, SiFlask, SiStreamlit, 
-  SiScikitlearn, SiPandas, SiNumpy, SiTensorflow,
-  SiHtml5, SiCss3, SiTailwindcss, SiGit, SiGithub,
-  SiMysql, SiPostgresql, SiDocker, SiLinux,
+  SiPython, SiJavascript, SiReact, SiHtml5, SiCss3, SiGithub,
+  SiMysql, SiDocker, SiLinux, SiScikitlearn, SiPandas, SiNumpy,
+  SiCplusplus, SiSpringboot, SiHibernate, SiJsonwebtokens, SiGooglecloud,
 } from 'react-icons/si';
-import { FiDatabase, FiCloud, FiTool } from 'react-icons/fi';
+import { FaJava } from 'react-icons/fa';
+import { FiDatabase, FiCloud, FiTool, FiCode, FiLayers, FiCpu, FiBookOpen, FiGlobe } from 'react-icons/fi';
 
 interface SkillItem {
   name: string;
@@ -24,47 +24,56 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    title: 'Programming Languages',
-    icon: FiTool,
+    title: 'Languages',
+    icon: FiCode,
     skills: [
+      { name: 'Java', level: 80, icon: FaJava, color: 'text-red-500' },
       { name: 'Python', level: 90, icon: SiPython, color: 'text-yellow-400' },
       { name: 'JavaScript', level: 85, icon: SiJavascript, color: 'text-yellow-300' },
-      { name: 'Java', level: 75, icon: FiTool, color: 'text-red-500' },
-      { name: 'C++', level: 70, icon: FiTool, color: 'text-blue-600' },
-      { name: 'SQL', level: 85, icon: FiDatabase, color: 'text-blue-400' },
+      { name: 'C++', level: 75, icon: SiCplusplus, color: 'text-blue-600' },
     ]
   },
   {
-    title: 'Machine Learning & Data Science',
-    icon: FiCloud,
+    title: 'Frameworks',
+    icon: FiLayers,
+    skills: [
+      { name: 'Spring Boot', level: 80, icon: SiSpringboot, color: 'text-green-500' },
+      { name: 'React', level: 85, icon: SiReact, color: 'text-cyan-400' },
+      { name: 'REST APIs', level: 85, icon: FiGlobe, color: 'text-blue-400' },
+      { name: 'JWT', level: 80, icon: SiJsonwebtokens, color: 'text-purple-500' },
+      { name: 'HTML', level: 90, icon: SiHtml5, color: 'text-orange-500' },
+      { name: 'CSS', level: 85, icon: SiCss3, color: 'text-blue-500' },
+    ]
+  },
+  {
+    title: 'Databases & Tools',
+    icon: FiDatabase,
+    skills: [
+      { name: 'MySQL', level: 85, icon: SiMysql, color: 'text-blue-400' },
+      { name: 'JPA/Hibernate', level: 75, icon: SiHibernate, color: 'text-red-400' },
+      { name: 'Git/GitHub', level: 88, icon: SiGithub, color: 'text-white' },
+      { name: 'Docker', level: 70, icon: SiDocker, color: 'text-cyan-500' },
+      { name: 'Linux', level: 75, icon: SiLinux, color: 'text-yellow-500' },
+      { name: 'GCP', level: 70, icon: SiGooglecloud, color: 'text-blue-500' },
+    ]
+  },
+  {
+    title: 'Machine Learning',
+    icon: FiCpu,
     skills: [
       { name: 'Scikit-learn', level: 88, icon: SiScikitlearn, color: 'text-orange-400' },
       { name: 'Pandas', level: 85, icon: SiPandas, color: 'text-blue-300' },
       { name: 'NumPy', level: 82, icon: SiNumpy, color: 'text-blue-500' },
-      { name: 'Seaborn', level: 75, icon: FiTool, color: 'text-purple-400' },
-      { name: 'TensorFlow', level: 65, icon: SiTensorflow, color: 'text-orange-500' },
+      { name: 'NLP', level: 80, icon: FiCpu, color: 'text-green-400' },
     ]
   },
   {
-    title: 'Web Development',
-    icon: FiTool,
+    title: 'Core Concepts',
+    icon: FiBookOpen,
     skills: [
-      { name: 'React', level: 75, icon: SiReact, color: 'text-cyan-400' },
-      { name: 'Flask', level: 78, icon: SiFlask, color: 'text-gray-300' },
-      { name: 'Streamlit', level: 90, icon: SiStreamlit, color: 'text-red-400' },
-      { name: 'HTML/CSS', level: 88, icon: SiHtml5, color: 'text-orange-400' },
-      { name: 'Tailwind CSS', level: 75, icon: SiTailwindcss, color: 'text-cyan-300' },
-    ]
-  },
-  {
-    title: 'Tools & Technologies',
-    icon: FiDatabase,
-    skills: [
-      { name: 'Git/GitHub', level: 85, icon: SiGithub, color: 'text-white' },
-      { name: 'MySQL', level: 80, icon: SiMysql, color: 'text-blue-400' },
-      { name: 'PostgreSQL', level: 50, icon: SiPostgresql, color: 'text-blue-500' },
-      { name: 'Docker', level: 60, icon: SiDocker, color: 'text-blue-400' },
-      { name: 'Linux', level: 70, icon: SiLinux, color: 'text-yellow-300' },
+      { name: 'Data Structures & Algorithms', level: 85, icon: FiCode, color: 'text-yellow-400' },
+      { name: 'Object-Oriented Programming', level: 88, icon: FiLayers, color: 'text-purple-400' },
+      { name: 'DBMS', level: 85, icon: FiDatabase, color: 'text-blue-400' },
     ]
   }
 ];
@@ -97,46 +106,52 @@ const Skills = () => {
   // Helper to get custom diagnostic messages for each skill
   const getSkillInsight = (name: string) => {
     switch (name) {
+      case 'Java':
+        return 'Utilized in academic computer science coursework, object-oriented systems design, and backend development.';
       case 'Python':
         return 'Core language for Machine Learning algorithms, predictive analytics, and backend data processing pipelines.';
       case 'JavaScript':
         return 'Used to implement complex client-side application logic, animations, and interactive components.';
-      case 'Java':
-        return 'Utilized in academic computer science coursework, object-oriented systems design, and algorithms.';
       case 'C++':
         return 'Applied for low-level memory operations, performance-critical problem solving, and structures.';
-      case 'SQL':
-        return 'Highly proficient in database schema design, complex joins, subqueries, and indexing optimization.';
+      case 'Spring Boot':
+        return 'Framework for building robust, enterprise-ready Java backend applications and REST microservices.';
+      case 'React':
+        return 'Primary library for responsive interactive client interfaces, SPA routing, and state management.';
+      case 'REST APIs':
+        return 'Designing and implementing standard architectural styles for distributed web services and integrations.';
+      case 'JWT':
+        return 'Securing web endpoints with JSON Web Tokens for stateless user authentication and authorization.';
+      case 'HTML':
+        return 'Structuring web content with standard semantic markup, ensuring high accessibility and SEO readiness.';
+      case 'CSS':
+        return 'Crafting responsive layouts, flexboxes, grids, and beautiful visual aesthetics with modern CSS.';
+      case 'MySQL':
+        return 'Relational database management, transaction handling, constraints, and query analysis.';
+      case 'JPA/Hibernate':
+        return 'Object-relational mapping framework to bridge Java applications with relational database engines.';
+      case 'Git/GitHub':
+        return 'Standard version control workflow, collaborative pull requests, branch protection, and actions.';
+      case 'Docker':
+        return 'Used to package full-stack applications into portable container images for easy deployments.';
+      case 'Linux':
+        return 'Command line terminal navigation, environment configuration, and server administration tools.';
+      case 'GCP':
+        return 'Deploying and managing cloud infrastructure using Google Cloud Platform tools and services.';
       case 'Scikit-learn':
         return 'Primary ML tool used for regression, classification, cross-validation, and hyperparameter tuning.';
       case 'Pandas':
         return 'Used extensively for data wrangling, cleaning, correlation analysis, and data exploration.';
       case 'NumPy':
         return 'Leveraged for scientific computation, matrix mathematical calculations, and vector operations.';
-      case 'Seaborn':
-        return 'Used to generate analytics visualizations, correlation heatmaps, and distribution plots.';
-      case 'TensorFlow':
-        return 'Utilized for deep learning neural networks, image/text processing models, and tensor graphs.';
-      case 'React':
-        return 'Primary library for responsive interactive client interfaces, SPA routing, and state management.';
-      case 'Flask':
-        return 'Used to build lightweight, fast backend microservices and API gateways for ML models.';
-      case 'Streamlit':
-        return 'Favorite tool for rapid data science dashboard deployments and live interactive UI prototyping.';
-      case 'HTML/CSS':
-        return 'Strong foundations in modern responsive layout grids, flexboxes, and standard accessibility.';
-      case 'Tailwind CSS':
-        return 'Primary styling utility for responsive layout design, utility-first structures, and animations.';
-      case 'Git/GitHub':
-        return 'Standard version control workflow, collaborative pull requests, branch protection, and actions.';
-      case 'MySQL':
-        return 'Relational database management, transaction handling, constraints, and query analysis.';
-      case 'PostgreSQL':
-        return 'Object-relational database used in production, integrating custom UUID keys and JWT authorization systems.';
-      case 'Docker':
-        return 'Used to package full-stack applications into portable container images for easy deployments.';
-      case 'Linux':
-        return 'Command line terminal navigation, environment configuration, and server administration tools.';
+      case 'NLP':
+        return 'Processing and analyzing textual data using Natural Language Processing concepts and techniques.';
+      case 'Data Structures & Algorithms':
+        return 'Implementing efficient data representations and optimal algorithms for problem solving.';
+      case 'Object-Oriented Programming':
+        return 'Designing clean, modular, and maintainable systems using OOP principles like inheritance and polymorphism.';
+      case 'DBMS':
+        return 'Understanding relational model theory, database administration, and transaction ACID properties.';
       default:
         return 'Demonstrated operational capability, verified through project implementations and academic applications.';
     }
@@ -288,7 +303,11 @@ const Skills = () => {
                                           ? '#fb923c' 
                                           : skill.color.includes('text-green')
                                             ? '#4ade80'
-                                            : undefined
+                                            : skill.color.includes('text-purple')
+                                              ? '#c084fc'
+                                              : skill.color.includes('text-white')
+                                                ? '#ffffff'
+                                                : undefined
                               } : undefined}
                             />
                           );

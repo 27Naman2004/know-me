@@ -193,12 +193,12 @@ const About = () => {
                 <div>
                   <div className="flex justify-between text-sm mb-1.5">
                     <span className="font-semibold text-foreground">Machine Learning & Data Science</span>
-                    <span className="font-mono text-accent font-semibold">60%</span>
+                    <span className="font-mono text-accent font-semibold">45%</span>
                   </div>
                   <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
                     <motion.div
                       initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 0.6 }}
+                      whileInView={{ scaleX: 0.45 }}
                       viewport={{ once: true }}
                       transition={{ duration: 1, ease: 'easeOut' }}
                       className="h-full bg-gradient-accent origin-left rounded-full"
@@ -209,12 +209,12 @@ const About = () => {
                 <div>
                   <div className="flex justify-between text-sm mb-1.5">
                     <span className="font-semibold text-foreground">Full-Stack Software Development</span>
-                    <span className="font-mono text-primary font-semibold">40%</span>
+                    <span className="font-mono text-primary font-semibold">55%</span>
                   </div>
                   <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
                     <motion.div
                       initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 0.4 }}
+                      whileInView={{ scaleX: 0.55 }}
                       viewport={{ once: true }}
                       transition={{ duration: 1, ease: 'easeOut' }}
                       className="h-full bg-gradient-primary origin-left rounded-full"
